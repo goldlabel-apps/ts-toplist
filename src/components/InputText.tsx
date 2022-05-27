@@ -28,9 +28,6 @@ export default function InputText(props: InputTextShape) {
         helperText={ null}
         label={ null }
         defaultValue={value}
-        // onChange={(e) => {
-        //   onChange(e.target.value)
-        // }}
       />
     </Box>
   )

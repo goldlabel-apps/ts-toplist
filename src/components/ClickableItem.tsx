@@ -65,10 +65,3 @@ export default function ClickableItem(props:ClickableShape) {
               
             </ButtonBase>
 }
-
-/*
-<Box sx={{ flexGrow:1 }} />
-<Badge 
-            badgeContent={ id } 
-            color="default">
-*/

@@ -49,7 +49,6 @@ export default function Clicks() {
       }
     }
   }
-  // console.log ("bars", bars)
 
   return <Accordion defaultExpanded={ isExpanded }>
           <AccordionSummary
@@ -60,7 +59,7 @@ export default function Clicks() {
             </Typography>
             <Box sx={{flexGrow:1}} />
           </AccordionSummary>
-          
+          <AccordionDetails>
               <BarChart 
                 width={400} 
                 height={350} 
@@ -72,7 +71,7 @@ export default function Clicks() {
                 <Legend />
                 <Bar dataKey="count" fill="#ee1c25" />
               </BarChart>
-          
+            </AccordionDetails>
         </Accordion>
 }
 

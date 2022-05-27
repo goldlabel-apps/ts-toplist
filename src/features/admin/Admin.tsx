@@ -22,7 +22,7 @@ export default function Admin() {
 
   const dispatch = useAppDispatch()
   const admin = useAppSelector(selectAdmin)
-  const isExpanded = false
+  const isExpanded = true
 
   const onCreateClick = () => {
     dispatch(setAdmin({ key: "editorOpen", value: true}))
@@ -72,7 +72,3 @@ export default function Admin() {
 
         </Accordion>
 }
-
-/*
-<pre>{JSON.stringify(toplist, null, 2)}</pre>
-*/

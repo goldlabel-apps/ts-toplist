@@ -26,39 +26,16 @@ export default function Display() {
   }
 
   return (
-    <div style={{ height: 350 }}>
+    <div style={{ height: 375 }}>
       <DataGrid
         sx={{ border: 0 }}
         rows={list}
         columns={columns}
-        pageSize={7}
-        rowsPerPageOptions={[7]}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
         onRowClick={onRowClick}
         disableSelectionOnClick
       />
     </div>
   )
 }
-
-
-/*
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-*/
