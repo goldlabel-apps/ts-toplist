@@ -19,7 +19,7 @@ export default function Toplist() {
   const dispatch = useAppDispatch()
   const toplist = useAppSelector(selectToplist)
   const { list } = toplist.data
-  const isExpanded = false
+  const isExpanded = true
 
   React.useEffect(() => {
     const { fetching, fetched } = toplist.data

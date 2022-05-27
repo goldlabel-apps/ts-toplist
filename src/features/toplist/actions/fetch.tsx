@@ -6,12 +6,12 @@ export const fetch = (): AppThunk => async (dispatch: any) => {
   try {
     dispatch(setToplist({ key: "fetching", value: true }))
     dispatch(setToplist({ key: "fetched", value: false }))
+    dispatch(setToplist({ key: "list", value: [] }))
     const endpoint = "https://61d83b8ce6744d0017ba89e1.mockapi.io/api/v1/toplistItems"
     axios
       .get(`${endpoint}`)
       .then(function (response) {
         dispatch(setToplist({ key: "list", value: response.data }))
-        
       })
       .catch(function (error) {
         dispatch(setToplist({ key: "error", value: error }))

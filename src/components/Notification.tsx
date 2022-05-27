@@ -33,13 +33,17 @@ export default function Notification() {
       open
       sx={{ zIndex: 12345678 }}
       anchorOrigin={{
-        vertical: "bottom",
+        vertical: "top",
         horizontal: "center",
       }}
       autoHideDuration={5000}
       onClose={ handleClose }
     >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
+      <Alert 
+        variant="filled"
+        onClose={handleClose} 
+        severity={severity} 
+        sx={{ width: "100%" }}>
         {message}
       </Alert>
     </Snackbar>

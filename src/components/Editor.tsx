@@ -1,8 +1,10 @@
 import * as React from "react"
+import moment from "moment"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { selectAdmin, setAdmin } from "../features/admin/"
 import { 
     Box,
+    Button,
     Dialog,
     DialogActions,
     DialogContent,
@@ -10,6 +12,7 @@ import {
     IconButton,
     Typography,
 } from "@mui/material"
+import { InputText } from "./"
 import { Icon } from "../theme"
 
 export default function Editor() {
@@ -18,11 +21,25 @@ export default function Editor() {
     const admin = useAppSelector(selectAdmin)
     const { data } = admin
 
-    const { editorOpen, editorMode, selectedId } = data
+    const { editorOpen, selectedId, selectedItem } = data
 
-    const onSaveClick = () => {
-        console.log ("onSaveClick")
-        // dispatch((setAdmin({key: "editorOpen", value: false })))
+    let editorMode = "new"
+    let brandValue = "New brand value"
+    let offerValue = "New offer value"
+    let trackingLinkValue = "https://"
+    if (selectedItem) {
+        editorMode = "edit"
+        brandValue = selectedItem.brand
+        offerValue = selectedItem.brand
+        trackingLinkValue = selectedItem.trackingLink
+    }
+
+
+    const onUpdateClick = () => {
+        dispatch(setAdmin({ key: "notification", value: {
+            severity: "info",
+            message: "Update not implemented, but you can delete and create new ones"
+        }}))
     } 
 
     const onDeleteClick = () => {
@@ -33,6 +50,12 @@ export default function Editor() {
             id: selectedId,
         }})))
     } 
+
+    const onCancelClick = () => {
+        dispatch((setAdmin({key: "editorOpen", value: false })))
+        dispatch((setAdmin({key: "selectedId", value: null })))
+        dispatch((setAdmin({key: "selectedItem", value: null })))
+    }
 
     const onEditorClose = () => {
         dispatch((setAdmin({key: "editorOpen", value: false })))
@@ -50,34 +73,92 @@ export default function Editor() {
                             <Icon icon={ editorMode === "edit" ? "edit" : "new" } />
                         </Box>
                         <Typography variant="h6" sx={{ ml: 1, fontWeight: "lighter" }}>
-                            id {selectedId}
+                            { editorMode === "edit" ? 
+                                `Edit ${selectedId}` 
+                                : 
+                                "New TopList" }
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
-                        
-                            <IconButton 
-                                onClick={ onEditorClose }
-                                color="secondary" >
-                                <Icon icon="close" />
-                            </IconButton>
-
+                        <IconButton 
+                            onClick={ onEditorClose }
+                            color="secondary" >
+                            <Icon icon="close" />
+                        </IconButton>
                     </Box>
                 </DialogTitle>
+                
                 <DialogContent>
                     
-                </DialogContent>
-                <DialogActions sx={{mr:2}}>
-                    <IconButton 
-                        onClick={ onDeleteClick }
-                        color="secondary" >
-                        <Icon icon="delete" />
-                    </IconButton>
+                    <Typography variant="body2" sx={{ ml: 1 }}>
+                        Brand
+                    </Typography>
+                    <InputText
+                        id="brand"
+                        label="Brand"
+                        value={ brandValue }
+                    />
 
-                    <IconButton 
-                        onClick={ onSaveClick }
-                        color="secondary" >
+                    <Typography variant="body2" sx={{ ml: 1 }}>
+                        Offer
+                    </Typography>
+                    <InputText
+                        id="offer"
+                        label="Offer"
+                        value={ offerValue }
+                    />
+
+                    <Typography variant="body2" sx={{ ml: 1 }}>
+                    Tracking Link
+                    </Typography>
+                    <InputText
+                        id="trackingLink"
+                        label="Tracking Link"
+                        value={ trackingLinkValue }
+                    />
+
+                    <Typography variant="body2" sx={{ ml: 1 }}>
+                        Created { moment("2022-01-07T01:13:53.714Z").fromNow() }
+                    </Typography>
+
+
+                </DialogContent>
+                
+                <DialogActions sx={{mr:2}}>
+
+
+                    <Button
+                        color="secondary"
+                        onClick={ onCancelClick }>
+                        <span style={{ marginRight: 8, marginLeft: 8}}>
+                            Cancel
+                        </span>
+                    </Button>
+
+
+                    <Button 
+                        variant="contained"
+                        color="primary"
+                        onClick={ onDeleteClick }>
+                        <span style={{ marginRight: 8, marginLeft: 8}}>
+                            Delete
+                        </span>
+                        <Icon icon="delete" />
+                    </Button>
+
+                    <Button 
+                        variant="contained"
+                        color="primary" 
+                        onClick={ onUpdateClick }>
+                        <span style={{ marginRight: 8, marginLeft: 8}}>
+                            Update
+                        </span>
                         <Icon icon="save" />
-                    </IconButton>
+                    </Button>
 
                 </DialogActions>
             </Dialog>
 }
+
+/*
+<pre>{JSON.stringify(selectedItem, null, 2)}</pre>
+*/

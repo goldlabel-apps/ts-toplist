@@ -5,8 +5,9 @@ import { selectAdmin, setAdmin } from "../features/admin/"
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'id', width: 50 },
-  { field: 'offer', headerName: 'Offer', width: 100, editable: false },
-  { field: 'brand', headerName: 'Brand', width: 100, editable: false },
+  { field: 'offer', headerName: 'Offer', width: 150, editable: false },
+  { field: 'brand', headerName: 'Brand', width: 150, editable: false },
+  { field: 'trackingLink', headerName: 'Tracking Link', width: 150, editable: false },
 ]
 
 export default function Display() {
@@ -18,14 +19,14 @@ export default function Display() {
 
   const onRowClick = (row:any) => {
     const { id } = row
-    // console.log ("onRowClick", row)
     dispatch(setAdmin({ key: "editorOpen", value: true}))
     dispatch(setAdmin({ key: "editorMode", value: "edit"}))
     dispatch(setAdmin({ key: "selectedId", value: id}))
+    dispatch(setAdmin({ key: "selectedItem", value: row.row}))
   }
 
   return (
-    <div style={{ height: 500, width: '100%' }}>
+    <div style={{ height: 500 }}>
       <DataGrid
         rows={list}
         columns={columns}

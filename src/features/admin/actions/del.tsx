@@ -4,6 +4,9 @@ import {
   setAdmin,
   read,
 } from "../"
+import { 
+  fetch,
+} from "../../toplist"
 
 export const del = (id: string): AppThunk => async (dispatch: any) => {
   try {
@@ -26,6 +29,7 @@ export const del = (id: string): AppThunk => async (dispatch: any) => {
             message: `${id} was deleted OK`
           }}))
           dispatch(read())
+          dispatch(fetch())
         }
       })
       .catch(function (error) {
