@@ -1,4 +1,13 @@
 import * as React from "react"
+import { 
+  BarChart, 
+  Bar, 
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend, 
+} from 'recharts'
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { selectAdmin, fetchClicks } from "../../features/admin/"
 import {
@@ -21,21 +30,49 @@ export default function Clicks() {
     if (!fetchingClicks && !fetchedClick){
       dispatch(fetchClicks())
     }
-  }, [admin, dispatch]);
+  }, [admin, dispatch])
+  const { clicks } = admin.data
+  let bars: any = []
+  for (let i = 0; i < clicks.length; i++){
+    const { toplistItemId, brand, offer } = clicks[i]
+    if (!bars[toplistItemId]){
+      bars[toplistItemId] = {
+        count: 1,
+        brand,
+        offer,
+      }
+    } else {
+      bars[toplistItemId] = {
+        count: parseFloat(bars[toplistItemId].count) + 1,
+        brand,
+        offer,
+      }
+    }
+  }
+  // console.log ("bars", bars)
 
   return <Accordion defaultExpanded={ isExpanded }>
           <AccordionSummary
             sx={{ mt:2 }}
             expandIcon={<Icon icon="acc" />}>
             <Typography variant="h6" sx={{ mt: 0.5, fontWeight: "lighter"}}>
-                Clicks
+                Click Tracker Graph
             </Typography>
             <Box sx={{flexGrow:1}} />
           </AccordionSummary>
-          <AccordionDetails> 
-            G3 chart
-            
-          </AccordionDetails>
+          
+              <BarChart 
+                width={400} 
+                height={350} 
+                data={ bars }>
+                <CartesianGrid strokeDasharray="5 5" />
+                <XAxis dataKey="brand" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#ee1c25" />
+              </BarChart>
+          
         </Accordion>
 }
 

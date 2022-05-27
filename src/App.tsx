@@ -14,9 +14,8 @@ function App() {
           <Container>
           <Grid container spacing={1}>
             <Grid item xs={12} md={ 6 }>
-            <Clicks />
               <Admin />
-              
+              <Clicks />
             </Grid>
             <Grid item xs={ 12 } md={ 6 }>
               <Toplist />

@@ -22,8 +22,6 @@ export const fetchClicks = (): AppThunk => async (dispatch: any, getState: any) 
     }
     dispatch(setAdmin({ key: "fetchingClicks", value: true }))
     dispatch(setAdmin({ key: "fetchedClicks", value: false }))
-    
-
   } catch (error) {
     console.warn("fetchClicks error")
   }

@@ -5,8 +5,8 @@ import { selectAdmin, setAdmin } from "../features/admin/"
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'id', width: 50 },
-  { field: 'offer', headerName: 'Offer', width: 150, editable: false },
   { field: 'brand', headerName: 'Brand', width: 150, editable: false },
+  { field: 'offer', headerName: 'Offer', width: 150, editable: false },
   { field: 'trackingLink', headerName: 'Tracking Link', width: 150, editable: false },
 ]
 
