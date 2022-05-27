@@ -1,7 +1,7 @@
 {
   "name": "ts-toplist",
   "description": "Casino Toplist & Admin React Components in TypeScript",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",

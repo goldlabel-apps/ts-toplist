@@ -16,6 +16,10 @@ const initialState: AdminShape = {
     confirmOpen: false,
     notification: null,
     list: [],
+
+    fetchingClicks: false,
+    fetchedClicks: false,
+    clicks: [],
   },
 }
 

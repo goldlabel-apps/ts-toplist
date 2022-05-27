@@ -37,22 +37,37 @@ export default function ClickableItem(props:ClickableShape) {
   return <ButtonBase 
               sx={{
                 width: "100%",
-                // border: "1px solid rgba(0,0,0,0.1)",
-                // background: "rgba(0,0,0,0.025)",
-                // borderRadius: 1,
-                p: 0.5,
+                border: "1px solid rgba(0,0,0,0.05)",
+                background: "rgba(0,0,0,0.01)",
+                borderRadius: 1,
+                p: 1,
+                mt: 0.5,
+                mb: 0.5,
               }}
               onClick={onItemClick}
             >
+              <Box sx={{ 
+                        display: "block", 
+                        width: "100%", 
+                        textAlign:"left",
+              }}>
+                <Box>
+                <Typography variant="body1">
+                  {brand}
+                </Typography> 
+                </Box>
+                <Box>
+                <Typography variant="body2">
+                  {offer}
+                </Typography> 
+                </Box>
+              </Box>
               
-              <Typography variant="body2">
-                {offer}, {brand}
-              </Typography> 
-              <Box sx={{ flexGrow:1 }} />
             </ButtonBase>
 }
 
 /*
+<Box sx={{ flexGrow:1 }} />
 <Badge 
             badgeContent={ id } 
             color="default">

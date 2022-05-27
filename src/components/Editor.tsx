@@ -1,7 +1,7 @@
 import * as React from "react"
 import moment from "moment"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { selectAdmin, setAdmin, create } from "../features/admin/"
+import { selectAdmin, setAdmin, create, update } from "../features/admin/"
 import { 
     Box,
     Button,
@@ -36,10 +36,7 @@ export default function Editor() {
         createdAt =  selectedItem.createdAt
     }
 
-    
-
     const onCreateClick = () => {
-
         let brand, offer, trackingLink
         const brandEl: any = document.getElementById("brand")
         const offerEl: any = document.getElementById("offer")
@@ -47,7 +44,6 @@ export default function Editor() {
         if (brandEl) brand = brandEl.value
         if (offerEl) offer = offerEl.value
         if (trackingLinkEl)  trackingLink = trackingLinkEl.value
-
         const payload = {
             createdAt: moment(Date.now()).toISOString(),
             brand,
@@ -58,10 +54,21 @@ export default function Editor() {
     } 
 
     const onUpdateClick = () => {
-        dispatch(setAdmin({ key: "notification", value: {
-            severity: "info",
-            message: "Updating items is not yet implemented. We can delete and create new ones"
-        }}))
+        let brand, offer, trackingLink
+        const brandEl: any = document.getElementById("brand")
+        const offerEl: any = document.getElementById("offer")
+        const trackingLinkEl: any = document.getElementById("trackingLink")
+        if (brandEl) brand = brandEl.value
+        if (offerEl) offer = offerEl.value
+        if (trackingLinkEl)  trackingLink = trackingLinkEl.value
+        const payload = {
+            createdAt: moment(Date.now()).toISOString(),
+            updted: moment(Date.now()).toISOString(),
+            brand,
+            offer,
+            trackingLink,
+        }
+        dispatch(update(selectedId, payload))
     } 
 
     const onDeleteClick = () => {

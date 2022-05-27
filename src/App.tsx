@@ -4,7 +4,7 @@ import {
   CssBaseline,
   Grid,
 } from "@mui/material"
-import {Admin} from "./features/admin"
+import {Admin, Clicks} from "./features/admin"
 import {Toplist} from "./features/toplist"
 
 function App() {
@@ -13,15 +13,14 @@ function App() {
           <CssBaseline />
           <Container>
           <Grid container spacing={1}>
-
-            <Grid item xs={12} md={ 8 }>
+            <Grid item xs={12} md={ 6 }>
+            <Clicks />
               <Admin />
+              
             </Grid>
-
-            <Grid item xs={ 12 } md={ 4 }>
+            <Grid item xs={ 12 } md={ 6 }>
               <Toplist />
-            </Grid>
-                        
+            </Grid>     
           </Grid>
           </Container>
         </React.Fragment>
