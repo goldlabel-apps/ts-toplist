@@ -26,7 +26,7 @@ export default function Toplist() {
     if (!fetching && !fetched){
       dispatch(fetch())
     }
-  }, [toplist, dispatch]);
+  }, [toplist, dispatch])
 
   return <Accordion defaultExpanded={ isExpanded }>
           <AccordionSummary

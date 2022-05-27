@@ -47,6 +47,9 @@ export default function Admin() {
             <Typography variant="h6" sx={{ mt: 0.5, fontWeight: "lighter"}}>
               Admin
             </Typography>
+            <Box sx={{flexGrow:1}} />
+            
+
           </AccordionSummary>
           
           <AccordionDetails> 
@@ -55,7 +58,7 @@ export default function Admin() {
             <Notification />
             <Box sx={{ display: "flex" }}>
               <Button
-                variant="outlined"
+                variant="text"
                 color="secondary"
                 onClick={ onCreateClick }>
                 <span style={{ marginRight: 8, marginLeft: 8}}>
@@ -63,7 +66,7 @@ export default function Admin() {
                 </span>
                 <Icon icon="new" />
               </Button>
-              <Box sx={{flexGrow:1}} />
+              
             </Box>
             
             <Display />

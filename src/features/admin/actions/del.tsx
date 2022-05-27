@@ -45,8 +45,6 @@ export const del = (id: string): AppThunk => async (dispatch: any) => {
         return true
       })
 
-
-
   } catch (error) {
     
   }
