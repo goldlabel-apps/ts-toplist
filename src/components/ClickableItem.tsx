@@ -1,12 +1,11 @@
-
 import * as React from "react"
+import { useAppDispatch} from "../app/hooks"
 import { 
   Box,
   ButtonBase,
-  // Badge,
   Typography,
 } from "@mui/material"
-
+import { click } from "../features/toplist"
 export interface ClickableShape {
   data?: any
 }
@@ -20,7 +19,7 @@ export interface ItemShape {
 }
 
 export default function ClickableItem(props:ClickableShape) {
-  
+  const dispatch = useAppDispatch()
   const { data } = props
   const {
     id,
@@ -29,9 +28,9 @@ export default function ClickableItem(props:ClickableShape) {
     trackingLink,
   } = data
   
-  const onItemClick = (e: any) => {
-    e.preventDefault()
-    window.open(trackingLink, "_blank")
+  const onItemClick = () => {
+    dispatch(click(id))
+    // window.open(trackingLink, "_blank")
     // console.log ("onItemClick", id)
   }
 

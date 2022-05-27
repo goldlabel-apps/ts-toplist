@@ -1,11 +1,13 @@
 import * as React from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { selectAdmin, read } from "../../features/admin/"
+import { setAdmin, selectAdmin, read } from "../../features/admin/"
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Avatar,
+  Box,
+  Button,
   Typography,
 } from "@mui/material"
 import { Icon } from "../../theme"
@@ -20,8 +22,12 @@ export default function Admin() {
 
   const dispatch = useAppDispatch()
   const admin = useAppSelector(selectAdmin)
-  // const { list } = admin.data
   const isExpanded = true
+
+  const onCreateClick = () => {
+    dispatch(setAdmin({ key: "editorOpen", value: true}))
+    dispatch(setAdmin({ key: "editorMode", value: "create"}))
+  }
 
   React.useEffect(() => {
     const { fetching, fetched } = admin.data
@@ -42,12 +48,27 @@ export default function Admin() {
               Admin
             </Typography>
           </AccordionSummary>
+          
           <AccordionDetails> 
             <Confirm />
             <Editor />
             <Notification />
+            <Box sx={{ display: "flex" }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={ onCreateClick }>
+                <span style={{ marginRight: 8, marginLeft: 8}}>
+                  Create
+                </span>
+                <Icon icon="new" />
+              </Button>
+              <Box sx={{flexGrow:1}} />
+            </Box>
+            
             <Display />
           </AccordionDetails>
+
         </Accordion>
 }
 

@@ -2,26 +2,9 @@
 import { AppThunk } from "../../../app/store"
 import { setAdmin } from "../adminSlice"
 
-export const create = (): AppThunk => async (dispatch: any) => {
+export const create = (payload:any): AppThunk => async (dispatch: any) => {
   try {
-    dispatch( setAdmin({ key:"creating", value: true }) )
-    
-    
-    // const { endpoint, apiKey } = ipgeolocationConfig
-    // dispatch(setFingerprint({ key: "ipgeolocationLoading", value: true }))
-    // axios
-    //   .get(`${endpoint}${apiKey}`)
-    //   .then(function (response) {
-    //     dispatch(
-    //       setFingerprint({ key: "ipgeolocation", value: response.data })
-    //     )
-    //     dispatch(setFingerprint({ key: "ipgeolocationLoading", value: false }))
-    //     dispatch(setFingerprint({ key: "ipgeolocationLoaded", value: true }))
-    //   })
-    //   .catch(function (error) {})
-    //   .then(function () {
-    //     return true
-    //   })
+    console.log ("create",payload )
   } catch (error) {
     // dispatch(setSystemError(error))
   }

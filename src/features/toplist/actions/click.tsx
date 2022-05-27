@@ -1,27 +1,30 @@
-// import axios from "axios"
+import axios from "axios"
+import moment from "moment"
 import { AppThunk } from "../../../app/store"
 import { setToplist } from "../toplistSlice"
-// import { ipgeolocationConfig } from "../../../env"
 
-export const click = (): AppThunk => async (dispatch: any) => {
+export const click = (id: string): AppThunk => async (dispatch: any) => {
   try {
-    dispatch( setToplist({ key:"asdasdadsf", value:1213 }) )
-    // const { endpoint, apiKey } = ipgeolocationConfig
-    // dispatch(setFingerprint({ key: "ipgeolocationLoading", value: true }))
-    // axios
-    //   .get(`${endpoint}${apiKey}`)
-    //   .then(function (response) {
-    //     dispatch(
-    //       setFingerprint({ key: "ipgeolocation", value: response.data })
-    //     )
-    //     dispatch(setFingerprint({ key: "ipgeolocationLoading", value: false }))
-    //     dispatch(setFingerprint({ key: "ipgeolocationLoaded", value: true }))
-    //   })
-    //   .catch(function (error) {})
-    //   .then(function () {
-    //     return true
-    //   })
+    const baseURL = "https://61d83b8ce6744d0017ba89e1.mockapi.io/api/v1/"
+    const endpoint = `${baseURL}/clicks`
+    const ISODate = moment(Date.now()).toISOString()
+    axios
+      .post(endpoint, {
+        createdAt: moment(Date.now()).toISOString(),
+        toplistItemId: id
+      })
+        .then(function (res) {
+          
+          const { status } = res
+          if (status === 201){
+            console.log ("Click tracked", res.data)
+          }
+        })
+        .catch(function (error) {})
+        .then(function () {
+          return true
+        })
   } catch (error) {
-    // dispatch(setSystemError(error))
+    
   }
 }

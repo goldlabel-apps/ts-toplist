@@ -1,7 +1,7 @@
 import * as React from "react"
 import moment from "moment"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { selectAdmin, setAdmin } from "../features/admin/"
+import { selectAdmin, setAdmin, create } from "../features/admin/"
 import { 
     Box,
     Button,
@@ -23,9 +23,9 @@ export default function Editor() {
 
     const { editorOpen, selectedId, selectedItem } = data
 
-    let editorMode = "new"
-    let brandValue = "New brand value"
-    let offerValue = "New offer value"
+    let editorMode = "create"
+    let brandValue = ""
+    let offerValue = ""
     let createdAt = Date.now()
     let trackingLinkValue = "https://"
     if (selectedItem) {
@@ -36,6 +36,26 @@ export default function Editor() {
         createdAt =  selectedItem.createdAt
     }
 
+    
+
+    const onCreateClick = () => {
+
+        let brand, offer, trackingLink
+        const brandEl: any = document.getElementById("brand")
+        const offerEl: any = document.getElementById("offer")
+        const trackingLinkEl: any = document.getElementById("trackingLink")
+        if (brandEl) brand = brandEl.value
+        if (offerEl) offer = offerEl.value
+        if (trackingLinkEl)  trackingLink = trackingLinkEl.value
+
+        const payload = {
+            createdAt: moment(Date.now()).toISOString(),
+            brand,
+            offer,
+            trackingLink,
+        }
+        dispatch(create(payload))
+    } 
 
     const onUpdateClick = () => {
         dispatch(setAdmin({ key: "notification", value: {
@@ -71,14 +91,11 @@ export default function Editor() {
             >
                 <DialogTitle>
                     <Box sx={{ display: "flex" }}>
-                        <Box sx={{ mt: 0.5 }}>
+                        { editorMode === "edit" ?  <Box sx={{ mt: 0.5 }}>
                             <Icon icon={ editorMode === "edit" ? "edit" : "new" } />
-                        </Box>
+                        </Box> : null }
                         <Typography variant="h6" sx={{ ml: 1, fontWeight: "lighter" }}>
-                            { editorMode === "edit" ? 
-                                `Edit ${selectedId}` 
-                                : 
-                                "New TopList" }
+                            { editorMode === "edit" ? `Edit ${selectedId}` : null }
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
                         <IconButton 
@@ -90,10 +107,10 @@ export default function Editor() {
                 </DialogTitle>
                 
                 <DialogContent>
-
-                    <Typography variant="body1" gutterBottom sx={{ ml: 1 }}>
+                    { editorMode === "edit" ? <Typography variant="body1" gutterBottom sx={{ ml: 1 }}>
                         Created { moment( createdAt ).fromNow() }
-                    </Typography>
+                    </Typography> : null }
+                    
 
                     <Typography variant="body2" sx={{ ml: 1 }}>
                         Brand
@@ -114,16 +131,13 @@ export default function Editor() {
                     />
 
                     <Typography variant="body2" sx={{ ml: 1 }}>
-                    Tracking Link
+                        Tracking Link
                     </Typography>
                     <InputText
                         id="trackingLink"
                         label="Tracking Link"
                         value={ trackingLinkValue }
                     />
-
-                    
-
 
                 </DialogContent>
                 
@@ -138,8 +152,7 @@ export default function Editor() {
                         </span>
                     </Button>
 
-
-                    <Button 
+                    { editorMode === "edit" ? <Button 
                         variant="contained"
                         color="primary"
                         onClick={ onDeleteClick }>
@@ -147,14 +160,15 @@ export default function Editor() {
                             Delete
                         </span>
                         <Icon icon="delete" />
-                    </Button>
+                    </Button> : null }
+                    
 
                     <Button 
                         variant="contained"
                         color="secondary" 
-                        onClick={ onUpdateClick }>
+                        onClick={ editorMode === "edit" ? onUpdateClick : onCreateClick }>
                         <span style={{ marginRight: 8, marginLeft: 8}}>
-                            Update
+                            { editorMode === "edit" ? "Update" : "Create" }
                         </span>
                         <Icon icon="save" />
                     </Button>
