@@ -4,6 +4,7 @@ import { RootState } from '../../app/store'
 export interface AdminShape {
   slug: string
   data: any
+
 }
 
 const initialState: AdminShape = {
@@ -12,7 +13,8 @@ const initialState: AdminShape = {
     fetching: false,
     fetched: false,
     editorOpen: false,
-    confirmOpen: true,
+    confirmOpen: false,
+    notification: null,
     list: [],
   },
 }
@@ -33,4 +35,6 @@ export const adminSlice = createSlice({
 
 export const { setAdmin } = adminSlice.actions
 export const selectAdmin = (state: RootState) => state.admin
+export const selectNotification = (state: RootState) => state.admin.data.notification
+
 export default adminSlice.reducer

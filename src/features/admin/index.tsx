@@ -7,12 +7,14 @@ import { del } from "./actions/del"
 import { 
     setAdmin,
     selectAdmin,
+    selectNotification,
  } from "./adminSlice"
 
 export {
     Admin,
     setAdmin,
     selectAdmin,
+    selectNotification,
     create,
     read,
     update,

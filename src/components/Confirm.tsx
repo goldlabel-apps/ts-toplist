@@ -1,16 +1,11 @@
 import * as React from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
-import { selectAdmin, setAdmin } from "../features/admin/"
+import { selectAdmin, setAdmin, del } from "../features/admin/"
 import { 
     Alert,
     Button,
-    Box,
     Dialog,
     DialogActions,
-    DialogContent,
-    DialogTitle,
-    IconButton,
-    Typography,
 } from "@mui/material"
 import { Icon } from "../theme"
 
@@ -19,60 +14,41 @@ export default function Confirm() {
     const dispatch = useAppDispatch()
     const admin = useAppSelector(selectAdmin)
     const { data } = admin
-    const { confirmOpen, selectedId } = data
+    const { confirmAction, confirmOpen, selectedId } = data
 
     const onConfirmClose = () => {
         dispatch((setAdmin({key: "confirmOpen", value: false })))
     }    
 
     const onCancelClick = () => {
-        console.log("onCancelClick", selectedId)
-        // dispatch((setAdmin({key: "confirmOpen", value: false })))
+        dispatch((setAdmin({key: "confirmOpen", value: false })))
+        dispatch((setAdmin({key: "editorOpen", value: true })))
     } 
 
     const onConfirmClick = () => {
-        console.log("onConfirmClick", selectedId)
-        // dispatch((setAdmin({key: "confirmOpen", value: false })))
+        const { action, id } = confirmAction
+        if (action === "delete"){
+            dispatch(del(id))
+        }
     }  
     
     return <Dialog 
             open={ confirmOpen }
             fullWidth
-            maxWidth="sm"
-            onClose={ onConfirmClose }
-            >
-                <DialogTitle>
-                    <Box sx={{ display: "flex" }}>
-                        <Box sx={{ mt: 0.5 }}>
-                            <Icon icon="help" />
-                        </Box>
-                        <Typography variant="h6" sx={{ ml: 1, fontWeight: "lighter" }}>
-                            Confirm
-                        </Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                    </Box>
-                </DialogTitle>
-                <DialogContent>
-
-                    <Alert severity="warning">
-                        This action cannot be undone and will cause loss of data
-                    </Alert>
-
-                    
-                </DialogContent>
+            maxWidth="xs"
+            onClose={ onConfirmClose }>
+                <Alert severity="warning">
+                    Deleting <strong>{selectedId}</strong> cannot 
+                    be undone and will cause loss of data
+                </Alert>
                 <DialogActions sx={{mr:2}}>
-
                     <Button
-                        variant="outlined"
                         color="secondary"
                         onClick={ onCancelClick }>
                         <span style={{ marginRight: 8, marginLeft: 8}}>
                             Cancel
                         </span>
-                        <Icon icon="close" />
                     </Button>
-
-                    
                     <Button 
                         autoFocus
                         variant="contained"
@@ -83,7 +59,6 @@ export default function Confirm() {
                         </span>
                         <Icon icon="tick" />
                     </Button>
-
                 </DialogActions>
             </Dialog>
 }

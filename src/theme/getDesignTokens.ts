@@ -16,6 +16,9 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     secondary: {
       main: secondary,
     },
+    warning: {
+      main: secondary,
+    },
     
   },
 })

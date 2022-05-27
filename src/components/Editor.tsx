@@ -26,8 +26,12 @@ export default function Editor() {
     } 
 
     const onDeleteClick = () => {
-        console.log ("onDeleteClick")
-        // dispatch((setAdmin({key: "editorOpen", value: false })))
+        dispatch((setAdmin({key: "editorOpen", value: false })))
+        dispatch((setAdmin({key: "confirmOpen", value: true })))
+        dispatch((setAdmin({key: "confirmAction", value: {
+            action: "delete",
+            id: selectedId,
+        }})))
     } 
 
     const onEditorClose = () => {

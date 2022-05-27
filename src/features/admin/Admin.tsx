@@ -12,6 +12,7 @@ import {
   Display,
   Editor, 
   Confirm,
+  Notification,
 } from "../../components"
 
 export default function Admin() {
@@ -29,6 +30,7 @@ export default function Admin() {
   return <Box sx={{mt:2}}>
           <Confirm />
           <Editor />
+          <Notification />
           <CardHeader 
             avatar={<Avatar src="logo-red.svg" />}
             title={ <Typography variant="h6" sx={{ fontWeight: "lighter"}}>
