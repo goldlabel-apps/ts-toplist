@@ -26,7 +26,7 @@ export default function Display() {
   }
 
   return (
-    <div style={{ height: 500 }}>
+    <div style={{ height: 450 }}>
       <DataGrid
         sx={{ border: 0 }}
         rows={list}
