@@ -16,11 +16,14 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     secondary: {
       main: secondary,
     },
-    warning: {
-      main: secondary,
-    },
-    
   },
+  overrides: {
+    DataGrid: {
+        root:{
+            border: 'none',
+        }
+    }
+  }
 })
 
 

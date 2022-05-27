@@ -37,28 +37,32 @@ export default function Confirm() {
             fullWidth
             maxWidth="xs"
             onClose={ onConfirmClose }>
-                <Alert severity="warning">
+                
+                <Alert severity="error">
                     Deleting <strong>{selectedId}</strong> cannot 
                     be undone and will cause loss of data
                 </Alert>
                 <DialogActions sx={{mr:2}}>
+
                     <Button
+                        autoFocus
                         color="secondary"
                         onClick={ onCancelClick }>
                         <span style={{ marginRight: 8, marginLeft: 8}}>
                             Cancel
                         </span>
                     </Button>
+
                     <Button 
-                        autoFocus
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         onClick={ onConfirmClick }>
                         <span style={{ marginRight: 8, marginLeft: 8}}>
                             Confirm
                         </span>
                         <Icon icon="tick" />
                     </Button>
+                    
                 </DialogActions>
             </Dialog>
 }

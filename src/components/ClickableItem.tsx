@@ -26,19 +26,21 @@ export default function ClickableItem(props:ClickableShape) {
     id,
     offer,
     brand,
+    trackingLink,
   } = data
   
   const onItemClick = (e: any) => {
     e.preventDefault()
-    console.log ("onItemClick", id)
+    window.open(trackingLink, "_blank")
+    // console.log ("onItemClick", id)
   }
 
   return <ButtonBase 
               sx={{
                 width: "100%",
-                border: "1px solid rgba(0,0,0,0.1)",
-                background: "rgba(0,0,0,0.025)",
-                borderRadius: 1,
+                // border: "1px solid rgba(0,0,0,0.1)",
+                // background: "rgba(0,0,0,0.025)",
+                // borderRadius: 1,
                 p: 0.5,
               }}
               onClick={onItemClick}

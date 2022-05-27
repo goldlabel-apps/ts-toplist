@@ -26,19 +26,21 @@ export default function Editor() {
     let editorMode = "new"
     let brandValue = "New brand value"
     let offerValue = "New offer value"
+    let createdAt = Date.now()
     let trackingLinkValue = "https://"
     if (selectedItem) {
         editorMode = "edit"
         brandValue = selectedItem.brand
         offerValue = selectedItem.brand
         trackingLinkValue = selectedItem.trackingLink
+        createdAt =  selectedItem.createdAt
     }
 
 
     const onUpdateClick = () => {
         dispatch(setAdmin({ key: "notification", value: {
             severity: "info",
-            message: "Update not implemented, but you can delete and create new ones"
+            message: "Updating items is not yet implemented. We can delete and create new ones"
         }}))
     } 
 
@@ -88,7 +90,11 @@ export default function Editor() {
                 </DialogTitle>
                 
                 <DialogContent>
-                    
+
+                    <Typography variant="body1" gutterBottom sx={{ ml: 1 }}>
+                        Created { moment( createdAt ).fromNow() }
+                    </Typography>
+
                     <Typography variant="body2" sx={{ ml: 1 }}>
                         Brand
                     </Typography>
@@ -116,9 +122,7 @@ export default function Editor() {
                         value={ trackingLinkValue }
                     />
 
-                    <Typography variant="body2" sx={{ ml: 1 }}>
-                        Created { moment("2022-01-07T01:13:53.714Z").fromNow() }
-                    </Typography>
+                    
 
 
                 </DialogContent>
@@ -147,7 +151,7 @@ export default function Editor() {
 
                     <Button 
                         variant="contained"
-                        color="primary" 
+                        color="secondary" 
                         onClick={ onUpdateClick }>
                         <span style={{ marginRight: 8, marginLeft: 8}}>
                             Update

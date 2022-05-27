@@ -28,11 +28,11 @@ export default function Display() {
   return (
     <div style={{ height: 500 }}>
       <DataGrid
+        sx={{ border: 0 }}
         rows={list}
         columns={columns}
         pageSize={7}
         rowsPerPageOptions={[7]}
-        // checkboxSelection
         onRowClick={onRowClick}
         disableSelectionOnClick
       />

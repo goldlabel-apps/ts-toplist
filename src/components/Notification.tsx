@@ -33,7 +33,7 @@ export default function Notification() {
       open
       sx={{ zIndex: 12345678 }}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "center",
       }}
       autoHideDuration={5000}

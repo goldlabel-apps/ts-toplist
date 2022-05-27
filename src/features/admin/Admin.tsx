@@ -16,12 +16,11 @@ import {
   Notification,
 } from "../../components"
 
-
 export default function Admin() {
 
   const dispatch = useAppDispatch()
   const admin = useAppSelector(selectAdmin)
-  const { list } = admin.data
+  // const { list } = admin.data
   const isExpanded = true
 
   React.useEffect(() => {
@@ -53,15 +52,5 @@ export default function Admin() {
 }
 
 /*
-
 <pre>{JSON.stringify(toplist, null, 2)}</pre>
-
-<IconButton
-  color="primary"
-  onClick={ (e) => {
-    e.preventDefault()
-    dispatch(fetch())
-  }}>
-  <Icon icon="refresh" />
-</IconButton>
 */
